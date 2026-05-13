@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SLIIT Car Service Tracker | Lochana Graphics</title>
+    <title>Car Service Tracker</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://startbootstrap.github.io/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
     <style>
@@ -17,7 +17,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" onclick="showSection('dashSection')">
                 <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-car-cog"></i></div>
-                <div class="sidebar-brand-text mx-3">SLIIT SERVICE</div>
+                <div class="sidebar-brand-text mx-3">Service MS</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item"><a class="nav-link" onclick="showSection('dashSection')"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
@@ -37,49 +37,89 @@
 
                 <div class="container-fluid">
                     <div id="dashSection" class="content-section active-section">
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6 mb-4"><div class="card border-left-primary shadow h-100 py-2"><div class="card-body text-center"><h6>Total Vehicles</h6><h2 id="vCount">0</h2></div></div></div>
-                            <div class="col-xl-3 col-md-6 mb-4"><div class="card border-left-success shadow h-100 py-2"><div class="card-body text-center"><h6>Scheduled Services</h6><h2 id="sCount">0</h2></div></div></div>
-                        </div>
                         <div class="card shadow p-4 text-center">
-                            <h3>Welcome to SLIIT Car Service System</h3>
-                            <p>මෙනු එකෙන් අවශ්‍ය අංශය තෝරා දත්ත ඇතුළත් කරන්න.</p>
+                            <h3>Car Service Management System</h3>
+                            <p>Select an option from the sidebar to start.</p>
                         </div>
                     </div>
 
                     <div id="vSection" class="content-section">
-                        <div class="card shadow mb-4"><div class="card-header py-3 text-primary font-weight-bold">Add New Vehicle</div>
-                        <div class="card-body"><form id="vForm">
-                            <div class="row mb-2"><div class="col"><input type="text" id="vNum" class="form-control" placeholder="Vehicle No" required></div><div class="col"><input type="text" id="vBrand" class="form-control" placeholder="Brand" required></div></div>
-                            <button type="submit" class="btn btn-primary btn-block">Save Vehicle</button>
-                        </form></div></div>
-                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Vehicle No</th><th>Brand</th><th>Status</th></tr></thead><tbody id="vTable"></tbody></table></div></div>
+                        <div class="card shadow p-4">
+                            <h4>Vehicle Registration</h4>
+                            <form id="vForm">
+                                <input type="text" id="vNum" class="form-control mb-2" placeholder="Vehicle No" required>
+                                <input type="text" id="vBrand" class="form-control mb-2" placeholder="Brand" required>
+                                <button type="submit" class="btn btn-primary btn-block">Save Vehicle</button>
+                            </form>
+                            <table class="table mt-4"><thead><tr><th>Vehicle No</th><th>Brand</th></tr></thead><tbody id="vTable"></tbody></table>
+                        </div>
                     </div>
 
                     <div id="sSection" class="content-section">
-                        <div class="card shadow mb-4 border-left-success"><div class="card-header py-3 text-success font-weight-bold">Schedule Service</div>
-                        <div class="card-body"><form id="sForm">
-                            <input type="text" id="sVNum" class="form-control mb-2" placeholder="Vehicle Number" required>
-                            <input type="date" id="sDate" class="form-control mb-2" required>
-                            <input type="text" id="sMech" class="form-control mb-2" placeholder="Assign Mechanic" required>
-                            <button type="submit" class="btn btn-success btn-block">Set Appointment</button>
-                        </form></div></div>
-                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Vehicle</th><th>Mechanic</th><th>Date</th></tr></thead><tbody id="sTable"></tbody></table></div></div>
+                        <div class="card shadow p-4">
+                            <h4>Service Appointment</h4>
+                            <form id="sForm">
+                                <input type="text" id="sVNum" class="form-control mb-2" placeholder="Vehicle No" required>
+                                <input type="date" id="sDate" class="form-control mb-2" required>
+                                <button type="submit" class="btn btn-success btn-block">Schedule Service</button>
+                            </form>
+                            <table class="table mt-4"><thead><tr><th>Vehicle No</th><th>Date</th></tr></thead><tbody id="sTable"></tbody></table>
+                        </div>
                     </div>
 
                     <div id="mSection" class="content-section">
-                        <div class="card shadow mb-4 border-left-info"><div class="card-header py-3 text-info font-weight-bold">Mechanic Management</div>
-                        <div class="card-body"><form id="mForm">
-                            <input type="text" id="mName" class="form-control mb-2" placeholder="Mechanic Name" required>
-                            <input type="number" id="mExp" class="form-control mb-2" placeholder="Years of Experience" required>
-                            <button type="submit" class="btn btn-info btn-block">Register Mechanic</button>
-                        </form></div></div>
-                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Name</th><th>Experience</th></tr></thead><tbody id="mTable"></tbody></table></div></div>
+                        <div class="card shadow p-4">
+                            <h4>Mechanic Details</h4>
+                            <form id="mForm">
+                                <input type="text" id="mName" class="form-control mb-2" placeholder="Mechanic Name" required>
+                                <button type="submit" class="btn btn-info btn-block">Add Mechanic</button>
+                            </form>
+                            <table class="table mt-4"><thead><tr><th>Name</th></tr></thead><tbody id="mTable"></tbody></table>
+                        </div>
                     </div>
 
                     <div id="rSection" class="content-section">
-                        <div class="card shadow mb-4 border-left-warning"><div class="card-header py-3 text-warning font-weight-bold">Set Reminder</div>
-                        <div class="card-body"><form id="rForm">
-                            <input type="text" id="rVNum" class="form-control mb-2" placeholder="Vehicle No" required>
-                            <input type="text" id="rMsg" class="form-control mb-2" placeholder="Message" required>
-                            <button type="submit" class="btn btn-warning
+                        <div class="card shadow p-4">
+                            <h4>Set Reminders</h4>
+                            <form id="rForm">
+                                <input type="text" id="rVNum" class="form-control mb-2" placeholder="Vehicle No" required>
+                                <input type="text" id="rMsg" class="form-control mb-2" placeholder="Message" required>
+                                <button type="submit" class="btn btn-warning btn-block">Save Reminder</button>
+                            </form>
+                            <table class="table mt-4"><thead><tr><th>Vehicle</th><th>Message</th></tr></thead><tbody id="rTable"></tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active-section'));
+            document.getElementById(id).classList.add('active-section');
+            document.getElementById('sectionTitle').innerText = id.replace('Section', '').toUpperCase();
+        }
+
+        document.getElementById('vForm').onsubmit = (e) => { e.preventDefault();
+            document.getElementById('vTable').innerHTML += `<tr><td>${document.getElementById('vNum').value}</td><td>${document.getElementById('vBrand').value}</td></tr>`;
+            e.target.reset();
+        };
+
+        document.getElementById('sForm').onsubmit = (e) => { e.preventDefault();
+            document.getElementById('sTable').innerHTML += `<tr><td>${document.getElementById('sVNum').value}</td><td>${document.getElementById('sDate').value}</td></tr>`;
+            e.target.reset();
+        };
+
+        document.getElementById('mForm').onsubmit = (e) => { e.preventDefault();
+            document.getElementById('mTable').innerHTML += `<tr><td>${document.getElementById('mName').value}</td></tr>`;
+            e.target.reset();
+        };
+
+        document.getElementById('rForm').onsubmit = (e) => { e.preventDefault();
+            document.getElementById('rTable').innerHTML += `<tr><td>${document.getElementById('rVNum').value}</td><td>${document.getElementById('rMsg').value}</td></tr>`;
+            e.target.reset();
+        };
+    </script>
+</body>
+</html>
