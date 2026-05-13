@@ -3,30 +3,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Car Service Tracker | SLIIT Project</title>
+    <title>Car Service Management System</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://startbootstrap.github.io/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
     <style>
         .content-section { display: none; }
         .active-section { display: block !important; }
         .nav-item { cursor: pointer; }
+        .sidebar { min-height: 100-vh; }
     </style>
 </head>
 <body id="page-top">
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" onclick="showSection('dashSection')">
-                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-car-cog"></i></div>
-                <div class="sidebar-brand-text mx-3">SLIIT SERVICE</div>
+                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-tools"></i></div>
+                <div class="sidebar-brand-text mx-3">Service Pro</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item"><a class="nav-link" onclick="showSection('dashSection')"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">Operations</div>
-            <li class="nav-item"><a class="nav-link" onclick="showSection('vSection')"><i class="fas fa-fw fa-car"></i><span>Vehicle Management</span></a></li>
-            <li class="nav-item"><a class="nav-link" onclick="showSection('sSection')"><i class="fas fa-fw fa-calendar-check"></i><span>Service Scheduling</span></a></li>
-            <li class="nav-item"><a class="nav-link" onclick="showSection('mSection')"><i class="fas fa-fw fa-user-cog"></i><span>Mechanic Management</span></a></li>
-            <li class="nav-item"><a class="nav-link" onclick="showSection('rSection')"><i class="fas fa-fw fa-bell"></i><span>Reminders</span></a></li>
+            <div class="sidebar-heading">Main Menu</div>
+            <li class="nav-item"><a class="nav-link" onclick="showSection('vSection')"><span>1. Vehicle Management</span></a></li>
+            <li class="nav-item"><a class="nav-link" onclick="showSection('sSection')"><span>2. Service Scheduling</span></a></li>
+            <li class="nav-item"><a class="nav-link" onclick="showSection('hSection')"><span>3. Maintenance History</span></a></li>
+            <li class="nav-item"><a class="nav-link" onclick="showSection('rSection')"><span>4. Reminders</span></a></li>
+            <li class="nav-item"><a class="nav-link" onclick="showSection('mSection')"><span>5. Mechanic Management</span></a></li>
+            <li class="nav-item"><a class="nav-link" onclick="showSection('fSection')"><span>6. Feedback System</span></a></li>
         </ul>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -38,36 +41,70 @@
                 <div class="container-fluid">
                     <div id="dashSection" class="content-section active-section">
                         <div class="row">
-                            <div class="col-xl-4 col-md-6 mb-4"><div class="card border-left-primary shadow h-100 py-2"><div class="card-body text-center"><h6>Total Vehicles</h6><h2 id="vCount">0</h2></div></div></div>
-                            <div class="col-xl-4 col-md-6 mb-4"><div class="card border-left-success shadow h-100 py-2"><div class="card-body text-center"><h6>Task Completion</h6><div class="progress progress-sm mr-2"><div id="pBar" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div></div><span id="pText">0%</span></div></div></div>
-                        </div>
-                        <div class="card shadow p-4 text-center">
-                            <h3>Car Service Management System</h3>
-                            <p>Select an option from the sidebar to manage records.</p>
+                            <div class="col-xl-3 col-md-6 mb-4"><div class="card border-left-primary shadow h-100 py-2"><div class="card-body text-center"><h6>Vehicles</h6><h2 id="vCount">0</h2></div></div></div>
+                            <div class="col-xl-3 col-md-6 mb-4"><div class="card border-left-info shadow h-100 py-2"><div class="card-body text-center"><h6>System Progress</h6><div class="progress progress-sm"><div id="pBar" class="progress-bar bg-info" style="width: 0%"></div></div><span id="pText">0%</span></div></div></div>
                         </div>
                     </div>
 
                     <div id="vSection" class="content-section">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card shadow mb-4"><div class="card-header py-3 text-primary font-weight-bold">Add Vehicle Details</div>
-                                <div class="card-body"><form id="vForm">
-                                    <input type="text" id="vNum" class="form-control mb-2" placeholder="Vehicle No (e.g. CAS-8822)" required>
-                                    <input type="text" id="vBrand" class="form-control mb-2" placeholder="Brand" required>
-                                    <select id="vType" class="form-control mb-2"><option>Regular Maintenance</option><option>Engine Repair</option><option>Emergency</option></select>
-                                    <button type="submit" class="btn btn-primary btn-block">Register & Save</button>
-                                </form></div></div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="card shadow"><div class="card-header py-3 text-primary font-weight-bold">Maintenance Records</div>
-                                <div class="card-body"><table class="table table-bordered"><thead><tr><th>No</th><th>Brand</th><th>Status</th></tr></thead><tbody id="vTable"></tbody></table></div></div>
-                            </div>
-                        </div>
+                        <div class="card shadow mb-4"><div class="card-header py-3 text-primary font-weight-bold">Register Vehicle</div>
+                        <div class="card-body"><form onsubmit="addData(event, 'vTable', 'vCount')">
+                            <input type="text" class="form-control mb-2" placeholder="Vehicle Number" required>
+                            <input type="text" class="form-control mb-2" placeholder="Brand & Model" required>
+                            <button type="submit" class="btn btn-primary">Save Details</button>
+                        </form></div></div>
+                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Vehicle No</th><th>Details</th></tr></thead><tbody id="vTable"></tbody></table></div></div>
                     </div>
 
-                    <div id="sSection" class="content-section"><div class="card shadow p-4"><h4>Service Scheduling Section</h4></div></div>
-                    <div id="mSection" class="content-section"><div class="card shadow p-4"><h4>Mechanic Management Section</h4></div></div>
-                    <div id="rSection" class="content-section"><div class="card shadow p-4"><h4>Reminders Section</h4></div></div>
+                    <div id="sSection" class="content-section">
+                        <div class="card shadow mb-4"><div class="card-header py-3 text-success font-weight-bold">Schedule New Service</div>
+                        <div class="card-body"><form onsubmit="addData(event, 'sTable')">
+                            <input type="text" class="form-control mb-2" placeholder="Vehicle No" required>
+                            <input type="date" class="form-control mb-2" required>
+                            <button type="submit" class="btn btn-success">Schedule</button>
+                        </form></div></div>
+                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Vehicle</th><th>Date</th></tr></thead><tbody id="sTable"></tbody></table></div></div>
+                    </div>
+
+                    <div id="hSection" class="content-section">
+                        <div class="card shadow mb-4"><div class="card-header py-3 text-info font-weight-bold">Maintenance Logs</div>
+                        <div class="card-body"><form onsubmit="addData(event, 'hTable')">
+                            <input type="text" class="form-control mb-2" placeholder="Vehicle No" required>
+                            <input type="text" class="form-control mb-2" placeholder="Service Done" required>
+                            <button type="submit" class="btn btn-info">Add Log</button>
+                        </form></div></div>
+                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Vehicle</th><th>History</th></tr></thead><tbody id="hTable"></tbody></table></div></div>
+                    </div>
+
+                    <div id="rSection" class="content-section">
+                        <div class="card shadow mb-4"><div class="card-header py-3 text-warning font-weight-bold">Set Reminder</div>
+                        <div class="card-body"><form onsubmit="addData(event, 'rTable')">
+                            <input type="text" class="form-control mb-2" placeholder="Vehicle No" required>
+                            <input type="text" class="form-control mb-2" placeholder="Task" required>
+                            <button type="submit" class="btn btn-warning">Set</button>
+                        </form></div></div>
+                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Vehicle</th><th>Reminder</th></tr></thead><tbody id="rTable"></tbody></table></div></div>
+                    </div>
+
+                    <div id="mSection" class="content-section">
+                        <div class="card shadow mb-4"><div class="card-header py-3 text-danger font-weight-bold">Mechanic Profiles</div>
+                        <div class="card-body"><form onsubmit="addData(event, 'mTable')">
+                            <input type="text" class="form-control mb-2" placeholder="Mechanic Name" required>
+                            <input type="text" class="form-control mb-2" placeholder="Specialty" required>
+                            <button type="submit" class="btn btn-danger">Register Mechanic</button>
+                        </form></div></div>
+                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Name</th><th>Specialty</th></tr></thead><tbody id="mTable"></tbody></table></div></div>
+                    </div>
+
+                    <div id="fSection" class="content-section">
+                        <div class="card shadow mb-4"><div class="card-header py-3 text-dark font-weight-bold">Customer Feedback</div>
+                        <div class="card-body"><form onsubmit="addData(event, 'fTable')">
+                            <input type="text" class="form-control mb-2" placeholder="Customer Name" required>
+                            <textarea class="form-control mb-2" placeholder="Your Feedback"></textarea>
+                            <button type="submit" class="btn btn-dark">Submit Feedback</button>
+                        </form></div></div>
+                        <div class="card shadow"><div class="card-body"><table class="table table-bordered"><thead><tr><th>Customer</th><th>Feedback</th></tr></thead><tbody id="fTable"></tbody></table></div></div>
+                    </div>
 
                 </div>
             </div>
@@ -75,30 +112,30 @@
     </div>
 
     <script>
-        let count = 0;
+        let vehicleCount = 0;
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active-section'));
             document.getElementById(id).classList.add('active-section');
             document.getElementById('sectionTitle').innerText = id.replace('Section', '').toUpperCase();
         }
 
-        document.getElementById('vForm').onsubmit = (e) => { 
-            e.preventDefault();
-            count++;
-            let vNum = document.getElementById('vNum').value;
-            let vBrand = document.getElementById('vBrand').value;
-            
-            // Add to table
-            document.getElementById('vTable').innerHTML += `<tr><td>${vNum}</td><td>${vBrand}</td><td><span class="badge badge-success">Active</span></td></tr>`;
-            
-            // Update Dashboard
-            document.getElementById('vCount').innerText = count;
-            let progress = Math.min(count * 20, 100); // Progress increases by 20% each time
-            document.getElementById('pBar').style.width = progress + "%";
-            document.getElementById('pText').innerText = progress + "%";
-            
-            e.target.reset(); 
-        };
+        function addData(event, tableId, counterId = null) {
+            event.preventDefault();
+            const inputs = event.target.querySelectorAll('input, textarea');
+            let row = "<tr>";
+            inputs.forEach(input => { row += `<td>${input.value}</td>`; });
+            row += "</tr>";
+            document.getElementById(tableId).innerHTML += row;
+
+            if(counterId) {
+                vehicleCount++;
+                document.getElementById(counterId).innerText = vehicleCount;
+                let prog = Math.min(vehicleCount * 10, 100);
+                document.getElementById('pBar').style.width = prog + "%";
+                document.getElementById('pText').innerText = prog + "%";
+            }
+            event.target.reset();
+        }
     </script>
 </body>
 </html>
