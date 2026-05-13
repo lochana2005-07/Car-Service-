@@ -1,68 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Dashboard</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
+    <title>SLIIT Car Service Tracker | Lochana Graphics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
-
-    <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-wrench"></i></div>
+                <div class="sidebar-brand-text mx-3">SLIIT Service</div>
             </a>
-
-            <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
+            <li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
             <hr class="sidebar-divider">
+            <div class="sidebar-heading">Management</div>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-fw fa-car"></i><span>Vehicle Management</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-fw fa-calendar"></i><span>Service Scheduling</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-fw fa-history"></i><span>Maintenance History</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-fw fa-bell"></i><span>Reminders</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-fw fa-users-cog"></i><span>Mechanic Management</span></a></li>
+        </ul>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <h1 class="h4 mb-0 text-gray-800 ml-4">Car Service Tracker - Dashboard</h1>
+                </nav>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Vehicles</div>
+                                    <div id="totalVehicles" class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">Register New Vehicle</h6></div>
+                                <div class="card-body">
+                                    <form id="vehicleForm">
+                                        <div class="form-group"><input type="text" id="vNum" class="form-control" placeholder="Vehicle Number (Ex: WP CAS-8822)" required></div>
+                                        <div class="form-group"><input type="text" id="vBrand" class="form-control" placeholder="Brand (Ex: Toyota)" required></div>
+                                        <div class="form-group">
+                                            <select id="vType" class="form-control">
+                                                <option>Regular Service</option>
+                                                <option>Emergency Maintenance</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Register & Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">Maintenance Records</h6></div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Vehicle No</th>
+                                                    <th>Brand</th>
+                                                    <th>Service Type</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="vehicleTableBody">
+                                                <tr>
+                                                    <td>CAS-8822</td>
+                                                    <td>Toyota</td>
+                                                    <td>Regular</td>
+                                                    <td><span class="badge badge-success">Active</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
+    <script>
+        document.getElementById('vehicleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let num = document.getElementById('vNum').value;
+            let brand = document.getElementById('vBrand').value;
+            let type = document.getElementById('vType').value;
+
+            let table = document.getElementById('vehicleTableBody');
+            let newRow = `<tr>
+                <td>${num}</td>
+                <td>${brand}</td>
+                <td>${type}</td>
+                <td><span class="badge badge-primary">New</span></td>
+            </tr>`;
+            table.innerHTML += newRow;
+            
+            // Update total count
+            let currentCount = parseInt(document.getElementById('totalVehicles').innerText);
+            document.getElementById('totalVehicles').innerText = currentCount + 1;
+            
+            this.reset();
+        });
+    </script>
+</body>
+</html>                </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
